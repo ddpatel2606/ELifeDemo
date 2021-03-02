@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="com.dixitpatel.elifedemo.model.TaskResponse" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dimen_2dp"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/dimen_3dp"
+            app:cardElevation="@dimen/dimen_2dp"
+            android:elevation="@dimen/dimen_2dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivTaskImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10dp"
+                    app:Task_image="@{model.type}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tvTaskName"
+                    />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:background="@drawable/picture_shadow_drawable"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTaskName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_primary_variant"
+                    android:fontFamily="@font/poppins_medium"
+                    app:Task_name="@{model.name}"
+                    android:textSize="@dimen/text_size_25sp"
+                    android:layout_marginStart="@dimen/dimen_5dp"
+                    android:layout_marginTop="@dimen/dimen_3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivTaskImage" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTaskDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins"
+                    android:padding="2dp"
+                    app:Task_desc="@{model.description}"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:layout_marginTop="@dimen/dimen_3dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:layout_marginStart="@dimen/dimen_5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTaskName"
+                    app:layout_constraintStart_toEndOf="@+id/ivTaskImage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

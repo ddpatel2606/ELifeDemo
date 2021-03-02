@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.dixitpatel.elifedemo.ui.main.MainActivityViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.dixitpatel.elifedemo.ui.adapter.TasksAdapter" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:elevation="10dp"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:titleTextColor="@color/white" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_56dp">
+
+            <include layout="@layout/layout_no_internet"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:id="@+id/internetLayout"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/dimen_3dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myRecyclerView"
+                    adapter="@{adapter}"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:paddingTop="@dimen/dimen_0dp"
+                    android:scrollbars="vertical"
+                    app:adapterTaskList="@{viewModel.taskListLiveData}"
+                    app:elevation="0dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:toast="@{viewModel.toastLiveData}"
+                    tools:listitem="@layout/row_item_all"
+                    app:layout_constraintBottom_toTopOf="@id/sortingLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/internetLayout"/>
+
+            <com.dixitpatel.elifedemo.utils.CircularProgressView
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                app:gone="@{!viewModel.loading}"
+                app:layout_constraintBottom_toBottomOf="@+id/myRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/sortingLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/generalSortToogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2dp"
+                    android:background="@drawable/tooglebutton_selector"
+                    android:drawableTop="@drawable/ic_general_vector"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/medicationSortToogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2dp"
+                    android:background="@drawable/tooglebutton_selector"
+                    android:drawableTop="@drawable/ic_medication_vector"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/hydrationSortToogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2dp"
+                    android:background="@drawable/tooglebutton_selector"
+                    android:drawableTop="@drawable/ic_hydration_vector"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/nutritionSortToogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2dp"
+                    android:background="@drawable/tooglebutton_selector"
+                    android:drawableTop="@drawable/ic_nutrition_vector" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
